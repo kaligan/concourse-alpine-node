@@ -9,7 +9,7 @@ resources:
 - name: img
   type: docker-image
   source:
-    repository: docker-admobile.artifactory.appcarousel.com/appdirect/node-6
+    repository: docker-admobile.artifactory.appcarousel.com/appdirect/apline-node
     username: {{docker_username}}
     password: {{docker_password}}
 jobs:
