@@ -1,6 +1,6 @@
 FROM docker.artifactory.appcarousel.com/appcarousel/alpine-3:latest
 MAINTAINER Matt Nicholson <matt.nicholson@appdirect.com>
-ENV NODEJS_VERSION=v6.6.0
+ENV NODE_VERSION=6.6.0-r0
 ENV PATH=/apps/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
 
 RUN apk add --update bash
