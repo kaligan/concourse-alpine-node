@@ -1,30 +1,22 @@
 ---
 resources:
-  - name: git-resource
-    type: git
-    source:
-      uri: git@github.com:kaligan/concourse-node-6.git
-      branch: master
-  - name: version
-    type: semver
-    source:
-      driver: git
-      uri: git@github.com:kaligan/concourse-node-6.git
-      branch: version
-      file: version
-      private_key: {{git-private-key}}
-  - name: docker-image
-    type: docker-image
-    source:
-      username: {{docker-hub-username}}
-      password: {{docker-hub-password}}
-      repository: {{docker-hub-repository}}
-
+- name: src
+  type: git
+  source:
+    uri: git@github.com:kaligan/concourse-node-6.git
+    branch: master
+    private_key: {{git_private_key}}
+- name: img
+  type: docker-image
+  source:
+    repository: docker-admobile.artifactory.appcarousel.com/appdirect/node-6
+    username: {{docker_username}}
+    password: {{docker_password}}
 jobs:
-  - name: build-docker-image
-    plan:
-    - get: git-resource
-      trigger: true
-    - put: docker-image
-      params:
-        build: git-resource
+- name: build-image
+  plan:
+  - get: src
+    trigger: true
+  - put: img
+    params: {build: src}
+    get_params: {rootfs: true}
