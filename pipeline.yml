@@ -3,7 +3,7 @@ resources:
 - name: src
   type: git
   source:
-    uri: git@github.com:kaligan/concourse-node-6.git
+    uri: git@github.com:kaligan/concourse-node.git
     branch: master
     private_key: {{git_private_key}}
 - name: img
