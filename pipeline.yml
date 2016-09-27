@@ -1,0 +1,31 @@
+---
+resources:
+  - name: git-resource
+    type: git
+    source:
+      uri: https://github.com/kaligan/concourse-node-6.git
+      branch: master
+  - name: version
+    type: semver
+    source:
+      driver: git
+      uri: git@github.com:kaligan/concourse-node-6.git
+      branch: version
+      file: version
+      private_key: {{git-private-key}}
+  - name: docker-image
+    type: docker-image
+    source:
+      email: {{docker-hub-email}}
+      username: {{docker-hub-username}}
+      password: {{docker-hub-password}}
+      repository: {{docker-create-concourse-go-image}}
+
+jobs:
+  - name: build-docker-image
+    plan:
+    - get: git-resource
+      trigger: true
+    - put: docker-image
+      params:
+        build: git-resource
